@@ -1,0 +1,5 @@
+{
+    "require-dev": {
+        "dingo-d/wp-pest-integration-test-setup": "^1.5"
+    }
+}
