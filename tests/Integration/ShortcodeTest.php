@@ -18,7 +18,7 @@ afterEach(
 test(
 	'shortcode callback added to init hooks',
 	function () {
-		$this->assertNotFalse( has_action( 'init', 'wordpress_slideshow_register_shortcode' ) );
+		$this->assertNotFalse( has_action( 'init', array( \WP_Slideshow::get_instances(), 'add_shortcode' ) ) );
 	}
 );
 
@@ -30,5 +30,12 @@ test(
 		expect( $shortcode_tags )
 		->toBeArray()
 		->toHaveKey( 'myslideshow' );
+	}
+);
+
+test(
+	'shortcode can render content',
+	function () {
+		$this->assertFalse( has_shortcode( 'hello', 'myslideshow' ) );
 	}
 );
