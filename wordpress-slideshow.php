@@ -22,12 +22,12 @@ if ( ! defined( 'WPINC' ) ) {
 
 /* Checking if WP_Slideshow_Singleton exists and if it doesn't, it is including it. */
 if ( ! trait_exists( 'WP_Slideshow_Singleton' ) ) {
-	require_once __DIR__ . '/trait-wp-slideshow-singleton.php';
+	require_once plugin_dir_path( __FILE__ ) . '/includes/trait-wp-slideshow-singleton.php';
 }
 
 
 /* Checking if WP_Slideshow exists and if it doesn't, it is creating it. */
 if ( ! class_exists( 'WP_Slideshow' ) ) {
-	require_once plugin_dir_path( __FILE__ ) . 'class-wp-slideshow.php';
+	require_once plugin_dir_path( __FILE__ ) . '/includes/class-wp-slideshow.php';
 }
 WP_Slideshow::get_instances();

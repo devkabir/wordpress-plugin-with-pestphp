@@ -2,14 +2,18 @@
 
 namespace Tests\Integration;
 
+
 beforeEach(
 	function () {
 		parent::setUp();
+		\WP_Slideshow::get_instances();
 	}
 );
 
 afterEach(
 	function () {
+		global $shortcode_tags;
+		unset( $shortcode_tags['myslideshow'] );
 		parent::tearDown();
 	}
 );
@@ -18,7 +22,8 @@ afterEach(
 test(
 	'shortcode callback added to init hooks',
 	function () {
-		$this->assertNotFalse( has_action( 'init', array( \WP_Slideshow::get_instances(), 'add_shortcode' ) ) );
+		$instances = \WP_Slideshow::get_instances();
+		$this->assertNotFalse( has_action( 'init', array( $instances, 'add_shortcode' ) ) );
 	}
 );
 
@@ -36,6 +41,9 @@ test(
 test(
 	'shortcode can render content',
 	function () {
-		$this->assertFalse( has_shortcode( 'hello', 'myslideshow' ) );
+		$output = do_shortcode( '[myslideshow]' );
+		expect( $output )
+			->toBeString()
+			->toEqual( 'hello' );
 	}
 );

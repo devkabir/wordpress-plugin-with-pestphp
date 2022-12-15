@@ -36,3 +36,4 @@ class WP_Slideshow {
 	}
 
 }
+

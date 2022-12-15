@@ -5,9 +5,7 @@
 		 colors="true"
 >
 	<testsuites>
-		<testsuite name="Unit Test Suite">
-			<directory>./tests/Unit/</directory>
-		</testsuite>
+
 		<testsuite name="Integration Test Suite">
 			<directory>./tests/Integration/</directory>
 		</testsuite>
@@ -19,9 +17,9 @@
 		<server name="DB_PASSWORD" value=""/>
 		<server name="DB_HOST" value="localhost"/>
 	</php>
-	<coverage processUncoveredFiles="true">
+	<coverage>
 		<include>
-			<directory suffix=".php">./src</directory>
+			<directory suffix=".php">./includes</directory>
 		</include>
 		<report>
 			<clover outputFile="tests/coverage/clover.xml"/>
