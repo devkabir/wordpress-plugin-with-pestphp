@@ -4,7 +4,7 @@
  * only one object is available all across this plugin in a controlled state.
  *
  * @package    WP_Slideshow
- * @subpackage Trait\Singleton
+ * @subpackage Singleton
  * @since      1.0.0
  */
 
