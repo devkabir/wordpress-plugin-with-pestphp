@@ -27,19 +27,18 @@ trait WP_Slideshow_Singleton {
 	 * To return new or existing Singleton instance of the class from which it is called.
 	 * As it sets to final it can't be overridden.
 	 *
+	 * @return self
 	 * @since 1.0.0
 	 */
-	final public static function get_instances() {
+	final public static function get_instances(): self {
 
 		/**
 		 * Returns name of the class the static method is called in.
 		 */
-		$called_class = static::class;
-		$arguments    = func_get_args();
 
 		if ( ! isset( static::$instances ) ) {
 
-			static::$instances = new $called_class( ...$arguments );
+			static::$instances = new self();
 
 		}
 

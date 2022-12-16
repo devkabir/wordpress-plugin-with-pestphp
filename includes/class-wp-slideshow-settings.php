@@ -15,7 +15,7 @@
  *
  * @package    WP_Slideshow
  */
-class WP_Slideshow_Settings {
+final class WP_Slideshow_Settings {
 	use WP_Slideshow_Singleton;
 
 
@@ -23,7 +23,10 @@ class WP_Slideshow_Settings {
 	 * This is a WordPress function that adds a new menu item to the WordPress admin menu.
 	 */
 	private function __construct() {
-		add_action( 'admin_menu', array( $this, 'menu' ) );
+		if ( current_user_can( 'manage_options' ) ) {
+			add_action( 'admin_menu', array( $this, 'menu' ) );
+			add_action( 'admin_init', array( $this, 'init' ) );
+		}
 	}
 
 
@@ -32,7 +35,7 @@ class WP_Slideshow_Settings {
 	 *
 	 * @return void
 	 */
-	final public function menu(): void {
+	public function menu(): void {
 		add_menu_page(
 			'WordPress Slideshow',
 			'WP Slide',
@@ -45,8 +48,28 @@ class WP_Slideshow_Settings {
 	}
 
 
-	final public function page(): void {
+	public function page(): void {
 		echo 'WP Slideshow';
+	}
+
+	public function init(): void {
+		register_setting(
+			'wordpress_slideshow_settings',
+			'wordpress_slideshow_slides',
+			array(
+				'type'              => 'array',
+				'sanitize_callback' => array( $this, 'sanitize' ),
+			)
+		);
+	}
+
+	public function sanitize( $input ): array {
+		$sanitary_values = array();
+		if ( isset( $input ) && is_array( $input ) ) {
+			$sanitary_values = $input;
+		}
+
+		return $sanitary_values;
 	}
 
 }
