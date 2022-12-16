@@ -17,6 +17,8 @@ use function PHPUnit\Framework\assertFalse;
 use function PHPUnit\Framework\assertInstanceOf;
 use function PHPUnit\Framework\assertNotFalse;
 use function PHPUnit\Framework\assertSame;
+use function PHPUnit\Framework\assertStringContainsString;
+use function PHPUnit\Framework\assertStringNotContainsString;
 use function PHPUnit\Framework\assertTrue;
 
 
@@ -85,5 +87,35 @@ test(
 		expect( $filtered )
 			->toBeArray()
 			->toContain( 'smart' );
+	}
+);
+
+test(
+	'slides rendered rendered correctly',
+	function () {
+		set_current_screen( 'toplevel_page_wordpress-slideshow-plugin' );
+		WP_Slideshow_Settings::get_instances()->menu();
+		ob_start();
+		do_meta_boxes( get_current_screen()->id, 'normal', null );
+		$slides = ob_get_clean();
+		assertStringContainsString( 'Slides', $slides );
+		$option = get_option( 'wordpress_slideshow_slides', array() );
+		if ( empty( $option ) ) {
+			assertStringContainsString( 'No slide available', $slides );
+		} else {
+			assertStringNotContainsString( 'No slide available', $slides );
+		}
+	}
+);
+
+test(
+	'upload form rendered rendered correctly',
+	function () {
+		set_current_screen( 'toplevel_page_wordpress-slideshow-plugin' );
+		WP_Slideshow_Settings::get_instances()->menu();
+		ob_start();
+		do_meta_boxes( get_current_screen()->id, 'side', null );
+		$slides = ob_get_clean();
+		assertStringContainsString( 'Upload', $slides );
 	}
 );
