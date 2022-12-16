@@ -8,7 +8,7 @@
  */
 ?>
 <h1><?php esc_html_e( 'WordPress Slideshow', 'wordpress-slideshow' ); ?></h1>
-<div id="dashboard-widgets" class="metabox-holder<?php echo $columns_css; ?>">
+<div id="dashboard-widgets" class="metabox-holder<?php echo esc_attr( $columns_css ); ?>">
 	<div id="postbox-container-1" class="postbox-container">
 		<?php do_meta_boxes( $screen->id, 'normal', '' ); ?>
 	</div>

@@ -88,9 +88,7 @@ final class WP_Slideshow_Settings {
 	 */
 	public function render_slides(): void {
 		$images = get_option( $this->option );
-		ob_start();
 		include __DIR__ . '/../templates/slides.php';
-		echo ob_get_clean();
 	}
 
 	/**
@@ -101,9 +99,7 @@ final class WP_Slideshow_Settings {
 	public function render_upload(): void {
 		$images = get_option( $this->option, array() );
 		wp_nonce_field( basename( __FILE__ ), 'gallery_meta_nonce' );
-		ob_start();
 		include __DIR__ . '/../templates/upload.php';
-		echo ob_get_clean();
 	}
 
 	/**
@@ -119,11 +115,9 @@ final class WP_Slideshow_Settings {
 		if ( $columns ) {
 			$columns_css = " columns-$columns";
 		}
-		ob_start();
 		include __DIR__ . '/../templates/page.php';
 		wp_nonce_field( 'closedpostboxes', 'closedpostboxesnonce', false );
 		wp_nonce_field( 'meta-box-order', 'meta-box-order-nonce', false );
-		echo ob_get_clean();
 	}
 
 	/**

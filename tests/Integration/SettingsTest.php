@@ -93,10 +93,9 @@ test(
 test(
 	'slides rendered rendered correctly',
 	function () {
-		set_current_screen( 'toplevel_page_wordpress-slideshow-plugin' );
 		WP_Slideshow_Settings::get_instances()->menu();
 		ob_start();
-		do_meta_boxes( get_current_screen()->id, 'normal', null );
+		do_meta_boxes( 'toplevel_page_wordpress-slideshow-plugin', 'normal', null );
 		$slides = ob_get_clean();
 		assertStringContainsString( 'Slides', $slides );
 		$option = get_option( 'wordpress_slideshow_slides', array() );
@@ -111,10 +110,9 @@ test(
 test(
 	'upload form rendered rendered correctly',
 	function () {
-		set_current_screen( 'toplevel_page_wordpress-slideshow-plugin' );
 		WP_Slideshow_Settings::get_instances()->menu();
 		ob_start();
-		do_meta_boxes( get_current_screen()->id, 'side', null );
+		do_meta_boxes( 'toplevel_page_wordpress-slideshow-plugin', 'side', null );
 		$slides = ob_get_clean();
 		assertStringContainsString( 'Upload', $slides );
 	}

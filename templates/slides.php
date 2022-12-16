@@ -9,12 +9,12 @@
 ?>
 <?php if ( ! empty( $images ) ) : ?>
 	<ol id="wordpress-slides-sort" class="wrap">
-		<?php foreach ( $images as $key => $id ) : ?>
-			<li class="hndle" id="item-<?php echo esc_html( $id ); ?>">
-				<img src="<?php echo esc_url( wp_get_attachment_url( $id ) ); ?>"
-					 alt="Slider image no. <?php echo esc_html( $id ); ?>"/>
+		<?php foreach ( $images as $key => $image ) : ?>
+			<li class="hndle" id="item-<?php echo esc_html( $image ); ?>">
+				<img src="<?php echo esc_url( wp_get_attachment_url( $image ) ); ?>"
+					 alt="Slider image no. <?php echo esc_html( $image ); ?>"/>
 				<span class="dashicons dashicons-trash delete-slide"
-					  data-image="<?php echo esc_html( $id ); ?>"></span>
+					  data-image="<?php echo esc_html( $image ); ?>"></span>
 			</li>
 		<?php endforeach; ?>
 
