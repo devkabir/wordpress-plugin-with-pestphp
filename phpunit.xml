@@ -20,6 +20,7 @@
 	<coverage>
 		<include>
 			<directory suffix=".php">./includes</directory>
+			<directory suffix=".php">./templates</directory>
 		</include>
 		<report>
 			<clover outputFile="tests/coverage/clover.xml"/>

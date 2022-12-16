@@ -25,6 +25,12 @@ if ( ! trait_exists( 'WP_Slideshow_Singleton' ) ) {
 	require_once plugin_dir_path( __FILE__ ) . '/includes/trait-wp-slideshow-singleton.php';
 }
 
+/* Checking if the class WP_Slideshow_Assets exists and if it doesn't, it is including it. */
+if ( ! class_exists( 'WP_Slideshow_Assets' ) ) {
+	require_once plugin_dir_path( __FILE__ ) . '/includes/class-wp-slideshow-assets.php';
+}
+WP_Slideshow_Assets::get_instances();
+
 /* Checking if the user is in the admin area and if it is,
 it is including the class WP_Slideshow_Settings.
 If the user is not in the admin area,

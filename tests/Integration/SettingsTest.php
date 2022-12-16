@@ -10,7 +10,9 @@
 namespace Tests\Integration;
 
 require_once __DIR__ . '/../../includes/class-wp-slideshow-settings.php';
+require_once __DIR__ . '/../../includes/class-wp-slideshow-assets.php';
 
+use WP_Slideshow_Assets;
 use WP_Slideshow_Settings;
 use function PHPUnit\Framework\assertArrayHasKey;
 use function PHPUnit\Framework\assertFalse;
@@ -26,6 +28,7 @@ beforeEach(
 	function () {
 		parent::setUp();
 		wp_set_current_user( 1 );
+		$this->screen_id = 'toplevel_page_wordpress-slideshow-plugin';
 	}
 );
 
@@ -89,14 +92,37 @@ test(
 			->toContain( 'smart' );
 	}
 );
+test(
+	'settings enqueued scripts properly',
+	function () {
+		set_current_screen( $this->screen_id );
+		WP_Slideshow_Assets::get_instances()->admin();
+		WP_Slideshow_Settings::get_instances()->page();
+		assertTrue( wp_style_is( 'wordpress-slideshow' ) );
+		assertTrue( wp_script_is( 'wordpress-slideshow' ) );
+		assertTrue( wp_style_is( 'wordpress-slideshow-notification' ) );
+		assertTrue( wp_script_is( 'wordpress-slideshow-notification' ) );
+	}
+);
 
 test(
-	'slides rendered rendered correctly',
+	'script location added correctly',
+	function () {
+		set_current_screen( $this->screen_id );
+		WP_Slideshow_Assets::get_instances()->admin();
+		WP_Slideshow_Settings::get_instances()->page();
+		$styles = get_echo( 'wp_print_styles' );
+		assertStringContainsString( '/wp-content/plugins/wordpress-slideshow/includes/assets/admin.css', $styles );
+		$scripts = get_echo( 'wp_print_footer_scripts' );
+		assertStringContainsString( '/wp-content/plugins/wordpress-slideshow/includes/assets/admin.js', $scripts );
+	}
+);
+
+test(
+	'slides meta box rendered correctly',
 	function () {
 		WP_Slideshow_Settings::get_instances()->menu();
-		ob_start();
-		do_meta_boxes( 'toplevel_page_wordpress-slideshow-plugin', 'normal', null );
-		$slides = ob_get_clean();
+		$slides = get_echo( 'do_meta_boxes', array( $this->screen_id, 'normal', null ) );
 		assertStringContainsString( 'Slides', $slides );
 		$option = get_option( 'wordpress_slideshow_slides', array() );
 		if ( empty( $option ) ) {
@@ -108,12 +134,10 @@ test(
 );
 
 test(
-	'upload form rendered rendered correctly',
+	'upload form meta box rendered correctly',
 	function () {
 		WP_Slideshow_Settings::get_instances()->menu();
-		ob_start();
-		do_meta_boxes( 'toplevel_page_wordpress-slideshow-plugin', 'side', null );
-		$slides = ob_get_clean();
-		assertStringContainsString( 'Upload', $slides );
+		$upload_form = get_echo( 'do_meta_boxes', array( $this->screen_id, 'side', null ) );
+		assertStringContainsString( 'Upload', $upload_form );
 	}
 );
