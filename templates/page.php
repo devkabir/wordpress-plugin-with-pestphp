@@ -15,10 +15,5 @@
 	<div id="postbox-container-2" class="postbox-container">
 		<?php do_meta_boxes( $screen->id, 'side', '' ); ?>
 	</div>
-	<div id="postbox-container-3" class="postbox-container">
-		<?php do_meta_boxes( $screen->id, 'column3', '' ); ?>
-	</div>
-	<div id="postbox-container-4" class="postbox-container">
-		<?php do_meta_boxes( $screen->id, 'column4', '' ); ?>
-	</div>
+
 </div>

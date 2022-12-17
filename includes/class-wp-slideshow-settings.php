@@ -108,6 +108,9 @@ final class WP_Slideshow_Settings {
 	 * @return void
 	 */
 	public function page(): void {
+		if ( ! did_action( 'wp_enqueue_media' ) ) {
+			wp_enqueue_media();
+		}
 		wp_enqueue_style( 'wordpress-slideshow' );
 		wp_enqueue_style( 'wordpress-slideshow-notification' );
 		wp_enqueue_script( 'wordpress-slideshow' );

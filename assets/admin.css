@@ -1,4 +1,35 @@
 /* stylesheet for meta boxes on wordpress-slideshow settings page */
-body {
-	background-color: #0a4b78 !important;
+ol {
+	counter-reset: my-awesome-counter;
+	display: flex;
+	flex-wrap: wrap;
+	flex-direction: column;
+}
+
+ol li {
+	counter-increment: my-awesome-counter;
+	display: flex;
+	flex-wrap: wrap;
+	flex-direction: row;
+	align-items: center;
+	margin-bottom: 0.5rem;
+}
+
+
+ol li::before {
+	content: counter(my-awesome-counter);
+	font-weight: bold;
+	font-size: 3rem;
+	margin-right: 0.5rem;
+	margin-left: 0.5rem;
+}
+
+ol li img {
+	width: calc(100% - 35%);
+	aspect-ratio: 3/1;
+	box-shadow: inset;
+}
+
+ol li .delete-slide {
+	cursor: pointer;
 }

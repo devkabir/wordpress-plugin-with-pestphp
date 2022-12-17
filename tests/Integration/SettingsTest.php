@@ -112,9 +112,9 @@ test(
 		WP_Slideshow_Assets::get_instances()->admin();
 		WP_Slideshow_Settings::get_instances()->page();
 		$styles = get_echo( 'wp_print_styles' );
-		assertStringContainsString( '/wp-content/plugins/wordpress-slideshow/includes/assets/admin.css', $styles );
+		assertStringContainsString( '/wp-content/plugins/wordpress-slideshow/assets/admin.css', $styles );
 		$scripts = get_echo( 'wp_print_footer_scripts' );
-		assertStringContainsString( '/wp-content/plugins/wordpress-slideshow/includes/assets/admin.js', $scripts );
+		assertStringContainsString( '/wp-content/plugins/wordpress-slideshow/assets/admin.js', $scripts );
 	}
 );
 
