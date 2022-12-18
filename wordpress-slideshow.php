@@ -36,11 +36,19 @@ it is including the class WP_Slideshow_Settings.
 If the user is not in the admin area,
 it is including the class WP_Slideshow. */
 if ( is_admin() ) {
-	/* Checking if the class WP_Slideshow_Settings exists and if it doesn't, it is including it. */
-	if ( ! class_exists( 'WP_Slideshow_Settings' ) ) {
-		require_once plugin_dir_path( __FILE__ ) . '/includes/class-wp-slideshow-settings.php';
+	if ( wp_doing_ajax() ) {
+		/* Checking if the class WP_Slideshow_Settings exists and if it doesn't, it is including it. */
+		if ( ! class_exists( 'WP_Slideshow_Ajax' ) ) {
+			require_once plugin_dir_path( __FILE__ ) . '/includes/class-wp-slideshow-ajax.php';
+		}
+		WP_Slideshow_Ajax::get_instances();
+	} else {
+		/* Checking if the class WP_Slideshow_Settings exists and if it doesn't, it is including it. */
+		if ( ! class_exists( 'WP_Slideshow_Settings' ) ) {
+			require_once plugin_dir_path( __FILE__ ) . '/includes/class-wp-slideshow-settings.php';
+		}
+		WP_Slideshow_Settings::get_instances();
 	}
-	WP_Slideshow_Settings::get_instances();
 } else {
 	/* Checking if WP_Slideshow exists and if it doesn't, it is creating it. */
 	if ( ! class_exists( 'WP_Slideshow' ) ) {

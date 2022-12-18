@@ -9,6 +9,32 @@ jQuery(
 
         const toggleSubmit = () => $('input.slide-selections').serializeArray().length > 0 ? $('#submit').show() : $('#submit').hide();
         toggleSubmit();
+        /* It handles all ajax request related to wordpress-slideshow */
+        const slideshow_ajax = (data, node = undefined) => {
+            if (ajaxing) {
+                return;
+            }
+            ajaxing = true;
+            $.ajax({
+                data: 'action=slideshow_ajax' + data,
+                type: 'POST',
+                url: ajaxurl
+            }).then(function (response) {
+                if (response.success) {
+                    notyf.success(response.data);
+                    if (undefined !== node) {
+                        node.parent().fadeOut(300, function () {
+                            node.parent().remove()
+                        })
+                    }
+                } else {
+                    notyf.error(response.data);
+                }
+            }).done(function () {
+                ajaxing = false;
+            });
+        };
+
         /* It open the media uploader. */
         body.on(
             'click',
@@ -57,7 +83,16 @@ jQuery(
                 customUploader.open()
             }
         );
-
+        /* It deletes a slide. */
+        $('body').on(
+            'click',
+            '.delete-slide',
+            function (event) {
+                event.preventDefault();
+                let image = '&slide_nonce_2=' + $('#slide-nonce-2').val() + '&image=' + $(this).data('image');
+                slideshow_ajax(image, $(this))
+            }
+        );
         /* It makes the slides sortable. */
         $("#wordpress-slides-sort").sortable({
             axis: 'y',

@@ -2,5 +2,6 @@
 
 use Yoast\WPTestUtils\BrainMonkey\TestCase;
 
-uses( TestCase::class )->group( 'integration' )->in( 'Integration' );
+uses()->group( 'integration' )->in( 'Integration' );
+uses()->group( 'ajax' )->in( 'Ajax' );
 
