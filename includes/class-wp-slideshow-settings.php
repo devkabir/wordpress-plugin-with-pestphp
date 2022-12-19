@@ -112,8 +112,8 @@ final class WP_Slideshow_Settings {
 			wp_enqueue_media();
 		}
 		wp_enqueue_style( 'wordpress-slideshow' );
-		wp_enqueue_style( 'wordpress-slideshow-notification' );
 		wp_enqueue_script( 'wordpress-slideshow' );
+		wp_enqueue_style( 'wordpress-slideshow-notification' );
 		wp_enqueue_script( 'wordpress-slideshow-notification' );
 		$screen      = get_current_screen();
 		$columns     = absint( $screen->get_columns() );

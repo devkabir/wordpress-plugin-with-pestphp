@@ -8,7 +8,8 @@
  */
 
 
-final class WP_Slideshow_Assets {
+class WP_Slideshow_Assets {
+
 
 	/* A trait to make this class singleton */
 	use WP_Slideshow_Singleton;
@@ -16,12 +17,9 @@ final class WP_Slideshow_Assets {
 	/**
 	 * It add callbacks to page specific actions
 	 */
-	public function __construct() {
-		if ( is_admin() ) {
-			add_action( 'admin_enqueue_scripts', array( $this, 'admin' ) );
-		} else {
-			add_action( 'wp_enqueue_scripts', array( $this, 'web' ) );
-		}
+	private function __construct() {
+		add_action( 'admin_enqueue_scripts', array( $this, 'admin' ) );
+		add_action( 'wp_enqueue_scripts', array( $this, 'web' ) );
 	}
 
 	/**
@@ -29,7 +27,7 @@ final class WP_Slideshow_Assets {
 	 *
 	 * @return void
 	 */
-	public function admin(): void {
+	final public function admin(): void {
 		wp_register_style(
 			'wordpress-slideshow',
 			plugin_dir_url( __DIR__ ) . 'assets/admin.css',
@@ -62,7 +60,7 @@ final class WP_Slideshow_Assets {
 	 * It registers the stylesheet and javascript file for the slideshow.
 	 */
 
-	public function web(): void {
+	final public function web(): void {
 		wp_register_style(
 			'wordpress-slideshow',
 			'https://cdn.jsdelivr.net/npm/swiffy-slider@1.6.0/dist/css/swiffy-slider.min.css',

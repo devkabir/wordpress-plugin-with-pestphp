@@ -2,12 +2,15 @@
 
 namespace Tests\Integration;
 
+use WP_Slideshow_Shortcode;
+
 require_once __DIR__ . '/../../includes/class-wp-slideshow-shortcode.php';
 beforeEach(
 	function () {
 		parent::setUp();
-		\WP_Slideshow_Shortcode::get_instances()->add();
-		set_current_screen('front');
+		WP_Slideshow_Shortcode::get_instances();
+		do_action( 'init' );
+		set_current_screen( 'front' );
 	}
 );
 
@@ -23,8 +26,7 @@ afterEach(
 test(
 	'shortcode callback added to init hooks',
 	function () {
-		$instances = \WP_Slideshow::get_instances();
-		$this->assertNotFalse( has_action( 'init', array( $instances, 'add_shortcode' ) ) );
+		$this->assertNotFalse( has_action( 'init', array( WP_Slideshow_Shortcode::get_instances(), 'add' ) ) );
 	}
 );
 

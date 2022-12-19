@@ -4,6 +4,7 @@
  *
  * @since 1.0.0
  */
+namespace tests\Ajax;
 
 require_once __DIR__ . '/../../includes/class-wp-slideshow-ajax.php';
 beforeEach(
@@ -31,6 +32,7 @@ beforeEach(
 		);
 		error_reporting( error_reporting() & ~E_WARNING );
 		set_current_screen( 'ajax' );
+		do_action( 'admin_init' );
 	}
 );
 afterEach(
@@ -51,7 +53,6 @@ test(
 			// Start output buffering.
 			ini_set( 'implicit_flush', false );
 			ob_start();
-			do_action( 'admin_init' );
 			do_action( 'wp_ajax_slideshow_ajax', null );
 			// Save the output.
 			$buffer = ob_get_clean();
@@ -82,7 +83,6 @@ test(
 			// Start output buffering.
 			ini_set( 'implicit_flush', false );
 			ob_start();
-			do_action( 'admin_init' );
 			do_action( 'wp_ajax_slideshow_ajax', null );
 			// Save the output.
 			$buffer = ob_get_clean();
