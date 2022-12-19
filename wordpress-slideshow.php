@@ -7,6 +7,7 @@
  */
 /**
  *  Plugin Name: WordPress Slideshow
+ * 	Description: A simple WordPress Slideshow
  *  Requires PHP:      7.4
  *  Requires at least: 5.4
  *  Version:           1.0.0

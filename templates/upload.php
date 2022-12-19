@@ -11,11 +11,10 @@
 	<tr>
 		<td>
 			<form method="post" action="options.php">
-				<?php settings_errors(); ?>
 				<?php settings_fields( 'wordpress_slideshow_settings' ); ?>
 				<a class="slide-upload button" href="#"><?php esc_html_e( 'Add image(s)', 'wordpress-slideshow' ); ?></a>
 				<ol id="selected-slides" class="wrap"></ol>
-				<?php submit_button(); ?>
+				<input id="submit" type="submit" value="<?php esc_html_e('Save Changes', 'wordpress-slideshow') ?>" style="display: none;" class="button button-primary" />
 			</form>
 
 		</td>

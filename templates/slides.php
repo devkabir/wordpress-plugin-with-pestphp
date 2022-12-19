@@ -12,7 +12,8 @@
 		<?php foreach ( $images as $key => $image ) : ?>
 			<li class="hndle" id="item-<?php echo esc_html( $image ); ?>">
 				<img src="<?php echo esc_url( wp_get_attachment_url( $image ) ); ?>"
-					 alt="Slider image no. <?php echo esc_html( $image ); ?>"/>
+					 alt="Slider image no. <?php echo esc_html( $image ); ?>"
+					 width="200"/>
 				<span class="dashicons dashicons-trash delete-slide"
 					  data-image="<?php echo esc_html( $image ); ?>"></span>
 			</li>

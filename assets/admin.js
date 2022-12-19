@@ -60,7 +60,7 @@ jQuery(
                             $("#selected-slides")
                                 .append(`<li id="slide-selection-${item.id}">
                                             <input type="hidden" class="slide-selections" name="wordpress_slideshow_slides[]" value="${item.id}"/>
-                                            <img src="${item.url}" alt="${item.id}"/> 
+                                            <img src="${item.url}" alt="${item.id}" width="200"/> 
                                             <span class="dashicons dashicons-trash remove-selection" data-image="${item.id}"></span> 
                                          </li>`);
                         });
