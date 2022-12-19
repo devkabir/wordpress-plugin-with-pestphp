@@ -9,6 +9,7 @@
 
 
 final class WP_Slideshow_Assets {
+
 	/* A trait to make this class singleton */
 	use WP_Slideshow_Singleton;
 
@@ -18,6 +19,8 @@ final class WP_Slideshow_Assets {
 	public function __construct() {
 		if ( is_admin() ) {
 			add_action( 'admin_enqueue_scripts', array( $this, 'admin' ) );
+		} else {
+			add_action( 'wp_enqueue_scripts', array( $this, 'web' ) );
 		}
 	}
 
@@ -55,4 +58,23 @@ final class WP_Slideshow_Assets {
 		);
 	}
 
+	/**
+	 * It registers the stylesheet and javascript file for the slideshow.
+	 */
+
+	public function web(): void {
+		wp_register_style(
+			'wordpress-slideshow',
+			'https://cdn.jsdelivr.net/npm/swiffy-slider@1.6.0/dist/css/swiffy-slider.min.css',
+			array(),
+			'1.0.0'
+		);
+		wp_register_script(
+			'wordpress-slideshow',
+			'https://cdn.jsdelivr.net/npm/swiffy-slider@1.6.0/dist/js/swiffy-slider.min.js',
+			array(),
+			'1.0.0',
+			true
+		);
+	}
 }

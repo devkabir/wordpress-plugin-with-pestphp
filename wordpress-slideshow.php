@@ -51,8 +51,8 @@ if ( is_admin() ) {
 	}
 } else {
 	/* Checking if WP_Slideshow exists and if it doesn't, it is creating it. */
-	if ( ! class_exists( 'WP_Slideshow' ) ) {
-		require_once plugin_dir_path( __FILE__ ) . '/includes/class-wp-slideshow.php';
+	if ( ! class_exists( 'WP_Slideshow_Shortcode' ) ) {
+		require_once plugin_dir_path( __FILE__ ) . '/includes/class-wp-slideshow-shortcode.php';
 	}
-	WP_Slideshow::get_instances();
+	WP_Slideshow_Shortcode::get_instances();
 }

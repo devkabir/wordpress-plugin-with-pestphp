@@ -37,3 +37,12 @@ test(
 		assertTrue( wp_script_is( 'wordpress-slideshow-notification', 'registered' ) );
 	}
 );
+
+test(
+	'assets class registered web scripts',
+	function () {
+		WP_Slideshow_Assets::get_instances()->web();
+		assertTrue( wp_style_is( 'wordpress-slideshow', 'registered' ) );
+		assertTrue( wp_script_is( 'wordpress-slideshow', 'registered' ) );
+	}
+);

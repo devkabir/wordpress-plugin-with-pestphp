@@ -2,11 +2,12 @@
 
 namespace Tests\Integration;
 
-
+require_once __DIR__ . '/../../includes/class-wp-slideshow-shortcode.php';
 beforeEach(
 	function () {
 		parent::setUp();
-		\WP_Slideshow::get_instances();
+		\WP_Slideshow_Shortcode::get_instances()->add();
+		set_current_screen('front');
 	}
 );
 
@@ -44,6 +45,6 @@ test(
 		$output = do_shortcode( '[myslideshow]' );
 		expect( $output )
 			->toBeString()
-			->toEqual( 'hello' );
+			->toContain( 'swiffy-slider' );
 	}
 );
