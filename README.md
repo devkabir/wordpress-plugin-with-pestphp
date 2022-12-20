@@ -17,7 +17,7 @@ W3 validation, 100% WCAG compatible, Super high Google Lighthouse scores,
 **Manual Installation**
 
 1. **Download** the plugin
-1. **Unzip** `wpcs-devkabir` folder to the `/wp-content/plugins/wordpress-slideshow` directory
+1. **Unzip** `wordpress-slideshow` folder to the `/wp-content/plugins/wordpress-slideshow` directory
 1. **Activate the plugin** through the 'Plugins' menu in WordPress
 1. It's finished !
 
